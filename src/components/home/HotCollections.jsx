@@ -35,7 +35,26 @@ const HotCollections = () => {
               <div className="small-border bg-color-2"></div>
             </div>
           </div>
-          <OwlCarousel className="owl-theme" loop margin={6} nav>
+          <OwlCarousel
+            className="owl-theme"
+            loop
+            margin={10}
+            nav
+            responsive={{
+              0: {
+                items: 1,
+              },
+              540: {
+                items: 1,
+              },
+              600: {
+                items: 2,
+              },
+              1000: {
+                items: 4,
+              },
+            }}
+          >
             {apiData?.map((nftData, index) => (
               <div
                 className="col-lg-3 col-md-6 col-sm-6 col-xs-12 item"
