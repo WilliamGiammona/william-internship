@@ -3,6 +3,8 @@ import axios from "axios";
 import { Link } from "react-router-dom";
 import AuthorImage from "../../images/author_thumbnail.jpg";
 import nftImage from "../../images/nftImage.jpg";
+import "slick-carousel/slick/slick.css";
+import "slick-carousel/slick/slick-theme.css";
 
 const HotCollections = () => {
   const [apiData, setApiData] = useState([]);
