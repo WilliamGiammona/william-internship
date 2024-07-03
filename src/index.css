@@ -11,11 +11,11 @@
 @import "./css/colors/scheme-01.css";
 @import "./css/styles/coloring.css";
 .item {
-  width: 100% !important; /* Ensure items take full width */
-  max-width: 600px; /* Adjust as needed */
-  margin: 0 auto; /* Center the items */
+  width: 100% !important; 
+  max-width: 600px;
+  margin: 0 auto;
 }
 
 .nft_coll {
-  width: 100%; /* Ensure collection takes full width */
+  width: 100%;
 }

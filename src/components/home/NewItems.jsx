@@ -1,9 +1,28 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import AuthorImage from "../../images/author_thumbnail.jpg";
 import nftImage from "../../images/nftImage.jpg";
+import axios from "axios";
 
 const NewItems = () => {
+  const [apiData, setApiData] = useState([]);
+
+  async function fetchData() {
+    try {
+      const data = await axios.get(
+        "https://us-central1-nft-cloud-functions.cloudfunctions.net/newItems"
+      );
+      setApiData(data);
+    } catch {
+      console.log("Error fetching new items data");
+    }
+  }
+
+  useEffect(() => {
+    fetchData();
+    console.log(apiData);
+  }, []);
+
   return (
     <section id="section-items" className="no-bottom">
       <div className="container">
