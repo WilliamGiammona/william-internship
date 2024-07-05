@@ -9,9 +9,10 @@ const NewItems = () => {
 
   async function fetchData() {
     try {
-      const data = await axios.get(
+      const { data } = await axios.get(
         "https://us-central1-nft-cloud-functions.cloudfunctions.net/newItems"
       );
+      console.log(data);
       setApiData(data);
     } catch {
       console.log("Error fetching new items data");
@@ -20,7 +21,6 @@ const NewItems = () => {
 
   useEffect(() => {
     fetchData();
-    console.log(apiData);
   }, []);
 
   return (
@@ -33,21 +33,21 @@ const NewItems = () => {
               <div className="small-border bg-color-2"></div>
             </div>
           </div>
-          {new Array(4).fill(0).map((_, index) => (
+          {apiData.map((dataItem, index) => (
             <div className="col-lg-3 col-md-6 col-sm-6 col-xs-12" key={index}>
               <div className="nft__item">
                 <div className="author_list_pp">
                   <Link
-                    to="/author"
+                    to={`/author/${dataItem.authorId}`}
                     data-bs-toggle="tooltip"
                     data-bs-placement="top"
                     title="Creator: Monica Lucas"
                   >
-                    <img className="lazy" src={AuthorImage} alt="" />
+                    <img className="lazy" src={dataItem.authorImage} alt="" />
                     <i className="fa fa-check"></i>
                   </Link>
                 </div>
-                <div className="de_countdown">5h 30m 32s</div>
+                <div className="de_countdown">{dataItem.expiryDate}</div>
 
                 <div className="nft__item_wrap">
                   <div className="nft__item_extra">
@@ -70,7 +70,7 @@ const NewItems = () => {
 
                   <Link to="/item-details">
                     <img
-                      src={nftImage}
+                      src={dataItem.nftImage}
                       className="lazy nft__item_preview"
                       alt=""
                     />
@@ -78,12 +78,12 @@ const NewItems = () => {
                 </div>
                 <div className="nft__item_info">
                   <Link to="/item-details">
-                    <h4>Pinky Ocean</h4>
+                    <h4>{dataItem.title}</h4>
                   </Link>
-                  <div className="nft__item_price">3.08 ETH</div>
+                  <div className="nft__item_price">{dataItem.price} ETH</div>
                   <div className="nft__item_like">
                     <i className="fa fa-heart"></i>
-                    <span>69</span>
+                    <span>{dataItem.likes}</span>
                   </div>
                 </div>
               </div>
