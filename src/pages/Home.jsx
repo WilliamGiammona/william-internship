@@ -1,4 +1,5 @@
-import React, { useEffect } from "react";
+import React, { useState, useEffect } from "react";
+import axios from "axios";
 import BrowseByCategory from "../components/home/BrowseByCategory";
 import HotCollections from "../components/home/HotCollections";
 import Landing from "../components/home/Landing";
@@ -7,6 +8,19 @@ import NewItems from "../components/home/NewItems";
 import TopSellers from "../components/home/TopSellers";
 
 const Home = () => {
+  const [apiData, setApiData] = useState([]);
+
+  async function fetchData() {
+    const { data } = await axios.get(
+      "https://us-central1-nft-cloud-functions.cloudfunctions.net/topSellers"
+    );
+    setApiData(data);
+  }
+
+  useEffect(() => {
+    fetchData();
+  }, []);
+
   useEffect(() => {
     window.scrollTo(0, 0);
   }, []);
@@ -19,7 +33,7 @@ const Home = () => {
         <LandingIntro />
         <HotCollections />
         <NewItems />
-        <TopSellers />
+        <TopSellers apiData={apiData} setApiData={setApiData} />
         <BrowseByCategory />
       </div>
     </div>
